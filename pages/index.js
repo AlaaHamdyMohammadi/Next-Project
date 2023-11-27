@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 
 function HomePage({data}) {
@@ -19,7 +20,7 @@ function HomePage({data}) {
         {data.map((event) => (
           <Link href={`/events/${event.id}`} key={event.id}>
             <h2>{event.title}</h2>
-            <img src={event.image} alt={event.title}/>
+            <Image src={event.image} alt={event.title} width={200} height={200}/>
             <p>{event.description}</p>
           </Link>
         ))}
