@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
 
-function HomePage() {
+function HomePage({data}) {
   return (
     <div>
       <Head>
-        <title>Events App</title>
+        <title>Events app</title>
       </Head>
       <header>
         <nav>
@@ -16,36 +16,28 @@ function HomePage() {
         </nav>
       </header>
       <main>
-        <Link href="">
-          <h2>Events in London</h2>
-          <img/>
-          <p>
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the
-            1500s, when an unknown printer took a galley of type and scrambled
-          </p>
-        </Link>
-        <Link href="">
-          <h2>Events in San Francisco</h2>
-          <img/>
-          <p>
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the
-            1500s, when an unknown printer took a galley of type and scrambled
-          </p>
-        </Link>
-        <Link href="">
-          <h2>Events in Barcelona</h2>
-          <img/>
-          <p>
-            simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the
-            1500s, when an unknown printer took a galley of type and scrambled
-          </p>
-        </Link>
+        {data.map((event) => (
+          <Link href={`/events/${event.id}`} key={event.id}>
+            <h2>{event.title}</h2>
+            <img src={event.image} alt={event.title}/>
+            <p>{event.description}</p>
+          </Link>
+        ))}
+        
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+ 
+  const {events_categories} = await import('./../data/data.json');
+  console.log(events_categories);
+  return {
+    props: {
+      data: events_categories,
+    },
+  };
 }
 
 export default HomePage;

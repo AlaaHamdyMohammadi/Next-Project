@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 function EventsPage() {
+    
   return (
     <div>
       <Link href="">
@@ -18,5 +19,7 @@ function EventsPage() {
     </div>
   );
 }
+
+
 
 export default EventsPage;
