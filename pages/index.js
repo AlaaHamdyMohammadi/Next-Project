@@ -11,20 +11,30 @@ function HomePage({data}) {
       <header>
         <nav>
           <img />
-          <Link href="/">Home</Link>
-          <Link href="/events">Events</Link>
-          <Link href="/aboutUs">About Us</Link>
+          <Link href="/" passHref>
+            Home
+          </Link>
+          <Link href="/events" passHref>
+            Events
+          </Link>
+          <Link href="/aboutUs" passHref>
+            About Us
+          </Link>
         </nav>
       </header>
       <main>
         {data.map((event) => (
-          <Link href={`/events/${event.id}`} key={event.id}>
+          <Link href={`/events/${event.id}`} key={event.id} passHref>
             <h2>{event.title}</h2>
-            <Image src={event.image} alt={event.title} width={200} height={200}/>
+            <Image
+              src={event.image}
+              alt={event.title}
+              width={200}
+              height={200}
+            />
             <p>{event.description}</p>
           </Link>
         ))}
-        
       </main>
     </div>
   );

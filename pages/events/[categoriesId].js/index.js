@@ -1,14 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
-function index({data}) {
-  return <div>
-    {data.map((event) => <Link key={event.id} href={`/event/${event.city}/${event.id}`}>
-        <Image src={event.image} alt={event.title} width={300} height={300}/>
-        <h2>{event.title}</h2>
-        <p>{event.description}</p>
-    </Link>)}
-  </div>;
+function index({ data, pageName }) {
+  return (
+    <div>
+      <h1>Events in {pageName}</h1>
+      {data.map((event) => (
+        <Link key={event.id} href={`/event/${event.city}/${event.id}`} passHref>
+          <Image src={event.image} alt={event.title} width={300} height={300} />
+          <h2>{event.title}</h2>
+          <p>{event.description}</p>
+        </Link>
+      ))}
+    </div>
+  );
 }
 
 export default index;
@@ -36,6 +41,6 @@ export async function getStaticProps(context) {
   const data = allEvents.filter(event => event.city === id);
 
   return {
-    props: {data},
+    props: {data, pageName: id},
   };
 }
