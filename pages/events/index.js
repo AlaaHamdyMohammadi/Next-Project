@@ -1,23 +1,31 @@
+import Image from "next/image";
 import Link from "next/link";
 
-function EventsPage() {
+function EventsPage({data}) {
     
   return (
     <div>
-      <Link href="">
-        <h2>Events in London</h2>
-        <img />
-      </Link>
-      <Link href="">
-        <h2>Events in San Francisco</h2>
-        <img />
-      </Link>
-      <Link href="">
-        <h2>Events in Barcelona</h2>
-        <img />
-      </Link>
+      {data.map((event) => (
+        <Link key={event.id} href={`/events/${event.id}`}>
+          <h2>{event.title}</h2>
+          <Image src={event.image} alt={event.title} width={300} height={300}/>
+        </Link>
+      ))}
+      
     </div>
   );
+}
+
+export async function getStaticProps(){
+  const {events_categories} = await import('/data/data.json');
+  console.log(events_categories)
+
+  return {
+    props: {
+      data: events_categories,
+      revalidate: 5,
+    }
+  }
 }
 
 
