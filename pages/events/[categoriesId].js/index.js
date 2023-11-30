@@ -6,7 +6,7 @@ function index({ data, pageName }) {
     <div>
       <h1>Events in {pageName}</h1>
       {data.map((event) => (
-        <Link key={event.id} href={`/event/${event.city}/${event.id}`} passHref>
+        <Link key={event.id} href={`/events/${event.city}/${event.id}`} passHref>
           <Image src={event.image} alt={event.title} width={300} height={300} />
           <h2>{event.title}</h2>
           <p>{event.description}</p>
@@ -16,10 +16,11 @@ function index({ data, pageName }) {
   );
 }
 
-export default index;
+
 
 export async function getStaticPaths() {
   const { events_categories } = await import("/data/data.json");
+  console.log(events_categories)
   const allPaths = events_categories.map((event) => {
     return {
       params: {
@@ -35,6 +36,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
+    console.log(context)
   const { allEvents } = await import("/data/data.json");
   const categoriesId = context.params.categoriesId;
   console.log(categoriesId);
@@ -44,3 +46,5 @@ export async function getStaticProps(context) {
     props: {data, pageName: id},
   };
 }
+
+export default index;

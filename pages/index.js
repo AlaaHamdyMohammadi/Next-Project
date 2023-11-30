@@ -44,7 +44,7 @@ export default HomePage;
 
 export async function getServerSideProps() {
  
-  const {events_categories} = await import('./../data/data.json');
+  const {events_categories} = await import('/data/data.json');
   // console.log(events_categories);
   return {
     props: {
