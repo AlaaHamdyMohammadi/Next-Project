@@ -30,6 +30,8 @@ function HomePage({data}) {
   );
 }
 
+export default HomePage;
+
 export async function getServerSideProps() {
  
   const {events_categories} = await import('./../data/data.json');
@@ -41,4 +43,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default HomePage;
+

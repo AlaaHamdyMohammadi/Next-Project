@@ -1,7 +1,7 @@
 function EventDetailPage() {
     return (
         <div>
-            london
+            Single Event
         </div>
     )
 }
