@@ -2,7 +2,8 @@ import Image from "next/image";
 
 function SingleEvent({ eventDate }) {
   return (
-    <div>
+    <div className="event_single_page">
+      <h1> {eventDate.title} </h1>
       <Image
         src={eventDate.image}
         alt={eventDate.title}

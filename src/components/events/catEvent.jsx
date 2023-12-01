@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function CatEvent({ data, pageName }) {
   return (
-    <div className="cat_events">
+    <div className="cat_events test">
       <h1>Events in {pageName}</h1>
       <div className="content">
         {data.map((event) => (
