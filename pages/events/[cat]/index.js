@@ -1,8 +1,13 @@
-import EventCard from "@/src/components/events/EventCard";
+import CatEvent from "@/src/components/events/catEvent";
+
 
 function EventsCatPage({ data, pageName }) {
   return (
-    <EventCard data={data} pageName={pageName} />
+    
+    
+      <CatEvent data={data} pageName={pageName} />
+      
+    
   );
 }
 

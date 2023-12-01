@@ -1,12 +1,10 @@
-import Image from "next/image";
+import SingleEvent from "@/src/components/events/SingleEvent";
 
 function EventDetailPage({ eventDate }) {
 
   return <div>
-    <Image src={eventDate.image} alt={eventDate.title} width={300} height={300}/>
-    <h1>{eventDate.title}</h1>
-    <p>{eventDate.description}</p>
-  </div>;
+    <SingleEvent eventDate={eventDate}/>
+  </div>
 }
 
 export async function getStaticPaths() {
@@ -14,7 +12,7 @@ export async function getStaticPaths() {
   const allPaths = allEvents.map((event) => {
     return {
         params: {
-            categoriesId: event.city,
+            cat: event.city,
             id: event.id
         }
     }
