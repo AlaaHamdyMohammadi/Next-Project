@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function SingleEvent({ eventDate }) {
   const inputEmail = useRef();
-  const router = useRouter()
+  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState('');
   // console.log(router);
 
 
@@ -13,6 +14,13 @@ function SingleEvent({ eventDate }) {
     e.preventDefault();
     const emailValue = inputEmail.current.value;
     const eventId = router.query.id;
+
+    const validRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(!emailValue.match(validRegex)){
+      setErrorMessage("Please introduce a correct email address");
+    }
+
     try{
       const res = await fetch('/api/emailRegistration', {
         method: "POST",
@@ -26,6 +34,7 @@ function SingleEvent({ eventDate }) {
       }
       const data = await res.json();
       console.log(data);
+      inputEmail.current.value = '';
 
     }catch(err){
       console.log(`Error is: ${err}`)
@@ -53,6 +62,7 @@ function SingleEvent({ eventDate }) {
         />
         <button type="submit">Submit</button>
       </form>
+      <p>{errorMessage}</p>
     </div>
   );
 }
