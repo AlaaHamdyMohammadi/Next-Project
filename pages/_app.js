@@ -1,6 +1,7 @@
 import AppLayout from "@/src/components/layout/AppLayout";
 import "@/styles/globals.css";
-import Head from "next/head";
+import "@/styles/general.sass";
+
 
 export default function App({ Component, pageProps }) {
   return (
