@@ -15,8 +15,8 @@ function HomePage({ data }) {
             <Image
               src={event.image}
               alt={event.title}
-              width={200}
-              height={200}
+              width={400}
+              height={300}
             />
           </div>
           <div className="content">
