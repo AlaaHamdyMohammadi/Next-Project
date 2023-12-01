@@ -1,11 +1,35 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useRef } from "react";
 
 function SingleEvent({ eventDate }) {
-  const ref = useRef();
+  const inputEmail = useRef();
+  const router = useRouter()
+  // console.log(router);
 
-  function handleSubmit(e){
+
+
+  async function handleSubmit(e){
     e.preventDefault();
+    const emailValue = inputEmail.current.value;
+    const eventId = router.query.id;
+    try{
+      const res = await fetch('/api/emailRegistration', {
+        method: "POST",
+        body: JSON.stringify({email: emailValue, eventId}),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      });
+      if(!res.ok){
+        throw new Error('Response Invalid')
+      }
+      const data = await res.json();
+      console.log(data);
+
+    }catch(err){
+      console.log(`Error is: ${err}`)
+    }
 
   }
   return (
@@ -21,8 +45,13 @@ function SingleEvent({ eventDate }) {
       <p>{eventDate.description}</p>
       <form onSubmit={handleSubmit} className="email_registration">
         <label htmlFor="email">Get Registered for this event!</label>
-        <input type="email" id="email" placeholder="Enter your email" ref={ref}/>
-        <button type="button">Submit</button>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          ref={inputEmail}
+        />
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
